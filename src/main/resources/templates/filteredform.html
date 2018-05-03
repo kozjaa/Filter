@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Klienci</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}" />
+
+    <script th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.1.0/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <form  class="form-horizontal" th:object="${client}" th:action="@{/filteredbyname}" th:method="post">
+        <div class="form-group">
+                <label class="control-label">Imie: </label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control form-control-sm" th:field="*{name}"/>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary btn-sm">Filtruj</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <p></p>
+    <form class="form-horizontal" th:object="${client}" th:action="@{/filteredbyage}" th:method="post">
+        <div class="form-group">
+            <label class="control-label">Wiek: </label>
+            <div class="input-group mb-3">
+                <input type="number" class="form-control form-control-sm" th:field="*{age}"/>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary btn-sm">Filtruj</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <p></p>
+    <form class="form-horizontal" th:object="${client}" th:action="@{/filteredbyheight}" th:method="post">
+        <div class="form-group">
+            <label class="control-label">Wzrost: </label>
+            <div class="input-group mb-3">
+                <input type="number" class="form-control form-control-sm" th:field="*{height}"/>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary btn-sm">Filtruj</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <p></p>
+    <form class="form-horizontal" th:object="${client}" th:action="@{/filteredbyweight}" th:method="post">
+        <div class="form-group">
+            <label class="control-label">Waga: </label>
+            <div class="input-group mb-3">
+                <input type="number" class="form-control form-control-sm" th:field="*{weight}"/>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary btn-sm">Filtruj</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <p></p>
+    <div class="row">
+        <a href="/clients" class="btn btn-success btn-sm">Powrot</a>
+    </div>
+</div>
+</body>
+</html>

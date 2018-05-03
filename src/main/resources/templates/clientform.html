@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dodaj klienta</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}" />
+
+    <script th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.1.0/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <form class="form-horizontal" th:object="${client}" th:action="@{/clients}" th:method="post">
+        <div class="form-group">
+            <label class="control-label">Imie:</label>
+            <input type="text" class="form-control form-control-sm" th:field="*{name}"/>
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Wiek:</label>
+            <input type="number" class="form-control form-control-sm" th:field="*{age}"/>
+            <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Wzrost:</label>
+            <input type="number" class="form-control form-control-sm" th:field="*{height}"/>
+            <p th:if="${#fields.hasErrors('height')}" th:errors="*{height}"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Waga</label>
+            <input type="number" class="form-control form-control-sm" th:field="*{weight}"/>
+            <p th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"/>
+        </div>
+        <div class="row">
+            <button type="submit" class="btn btn-primary btn-sm">Dodaj klienta</button>
+        </div>
+
+
+    </form>
+    <p></p>
+    <div class="row">
+        <a href="/clients" class="btn btn-success btn-sm">Powrot</a>
+    </div>
+</div>
+</body>
+</html>
