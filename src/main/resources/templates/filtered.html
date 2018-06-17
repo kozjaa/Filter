@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Klienci</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}" />
+
+    <script th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.1.0/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/clients">Klienci</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/newclient">Dodaj klienta</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/newfilter">Filtruj</a>
+            </li>
+            <li class="nav-item">
+                <form action="#" th:action="@{/logout}" method="post">
+                    <input class="btn btn-danger" type="submit" value="Wyloguj" />
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <table class="table table-sm table-hover">
+        <thead class="thead-light">
+        <tr><th>Imię klienta</th><th>Wiek</th><th>Wzrost</th><th>Waga</th><th></th><th></th><th></th></tr>
+        </thead>
+        <tbody th:each="client : ${clients}">
+        <tr>
+            <td th:text="${client.name}"></td>
+            <td th:text="${client.age}"></td>
+            <td th:text="${client.height + ' cm'}"></td>
+            <td th:text="${client.weight + ' kg'}"></td>
+            <td><a th:href="${'/client/'+client.id}" class="btn btn-info btn-sm">Podgląd</a></td>
+            <td><a th:href="${'/client/edit/'+client.id}" class="btn btn-success btn-sm">Edytuj</a></td>
+            <td><a th:href="${'/client/delete/'+client.id}" class="btn btn-danger btn-sm">Usuń</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <a href="/clients" class="btn btn-secondary btn-sm">Powrót</a>
+    </div>
+</div>
+</body>
+</html>

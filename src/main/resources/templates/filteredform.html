@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Klienci</title>
+    <title>Filtruj</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}" />
@@ -11,23 +11,12 @@
 </head>
 <body>
 <div class="container">
-    <form  class="form-horizontal" th:object="${client}" th:action="@{/filteredbyname}" th:method="post">
-        <div class="form-group">
-                <label class="control-label">Imie: </label>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control form-control-sm" th:field="*{name}"/>
-                <div class="input-group-append">
-                    <button type="submit" class="btn btn-primary btn-sm">Filtruj</button>
-                </div>
-            </div>
-        </div>
-    </form>
     <p></p>
     <form class="form-horizontal" th:object="${client}" th:action="@{/filteredbyage}" th:method="post">
         <div class="form-group">
             <label class="control-label">Wiek: </label>
             <div class="input-group mb-3">
-                <input type="number" class="form-control form-control-sm" th:field="*{age}"/>
+                <input type="text" class="form-control form-control-sm" th:field="*{age}"/>
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary btn-sm">Filtruj</button>
                 </div>
@@ -39,7 +28,7 @@
         <div class="form-group">
             <label class="control-label">Wzrost: </label>
             <div class="input-group mb-3">
-                <input type="number" class="form-control form-control-sm" th:field="*{height}"/>
+                <input type="text" class="form-control form-control-sm" th:field="*{height}"/>
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary btn-sm">Filtruj</button>
                 </div>
@@ -51,7 +40,7 @@
         <div class="form-group">
             <label class="control-label">Waga: </label>
             <div class="input-group mb-3">
-                <input type="number" class="form-control form-control-sm" th:field="*{weight}"/>
+                <input type="text" class="form-control form-control-sm" th:field="*{weight}"/>
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary btn-sm">Filtruj</button>
                 </div>
@@ -60,7 +49,7 @@
     </form>
     <p></p>
     <div class="row">
-        <a href="/clients" class="btn btn-success btn-sm">Powrot</a>
+        <a href="/clients" class="btn btn-secondary btn-sm">Powrót</a>
     </div>
 </div>
 </body>

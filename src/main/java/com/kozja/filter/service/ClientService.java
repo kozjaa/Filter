@@ -19,8 +19,13 @@ public class ClientService {
         return new ArrayList<>(clientRepository.getAllClients());
     }
 
+    public Client getClientById(Integer id)
+    {
+       return clientRepository.getClient(id);
+    }
+
     public void saveClient(Client client) {
-        clientRepository.createClient(client);
+        clientRepository.saveClient(client);
     }
 
     public void deleteClient(Integer id) {
@@ -39,7 +44,4 @@ public class ClientService {
         return (List<Client>) clientRepository.getClientsByweight(weight);
     }
 
-    public List<Client> getClientsByName(String name) {
-        return (List<Client>) clientRepository.getClientsByName(name);
-    }
 }

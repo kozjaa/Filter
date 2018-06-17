@@ -6,9 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -19,7 +17,7 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotNull
+    @NotBlank(message = "Musisz wypełinć pole")
     @Size(min = 2, max = 40, message = "Dlugosc imienia jest nieprawidlowa")
     private String name;
     @NotNull
@@ -32,17 +30,20 @@ public class Client {
     @Range(min = 2, max = 300, message = "Podana waga jest nieprawidlowa")
     private int weight;
 
+    private String description;
+
     public Client()
     {
 
      }
 
-    public Client(String name, int age, int height, int weight)
+    public Client(String name, int age, int height, int weight, String description)
     {
         this.name = name;
         this.age = age;
         this.height = height;
         this.weight = weight;
+        this.description = description;
     }
 
     @Override
@@ -90,4 +91,11 @@ public class Client {
         this.weight = weight;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

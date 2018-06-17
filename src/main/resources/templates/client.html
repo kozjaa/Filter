@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Klienci</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}" />
+
+    <script th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.1.0/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/clients">Klienci</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/newclient">Dodaj klienta</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/newfilter">Filtruj</a>
+            </li>
+            <li class="nav-item">
+                <form action="#" th:action="@{/logout}" method="post">
+                    <input class="btn btn-danger" type="submit" value="Wyloguj" />
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${client.name}"></h5>
+            <h6 class="card-subtitle mb-2 text-muted" th:text="${'Wiek: ' + client.age}"></h6>
+            <h6 class="card-subtitle mb-2 text-muted" th:text="${'Wzrost: ' + client.height + ' cm'}"></h6>
+            <h6 class="card-subtitle mb-2 text-muted" th:text="${'Waga: ' + client.weight + ' kg'}"></h6>
+            <p class="card-text" th:text="${client.description}"></p>
+            <a th:href="${'/client/edit/'+client.id}" class="btn btn-success btn-sm">Edytuj</a>
+            <a th:href="${'/client/delete/'+client.id}" class="btn btn-danger btn-sm">Usuń</a>
+        </div>
+    </div>
+    <p></p>
+    <div class="row">
+        <p></p>
+    <a href="/clients" class="btn btn-secondary btn-sm">Powrót</a>
+    </div>
+</div>
+</body>
+</html>

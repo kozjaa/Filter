@@ -15,6 +15,7 @@ import java.util.List;
 
 @Controller
 public class ClientController {
+
     @Autowired
     ClientService clientService;
 
@@ -23,14 +24,15 @@ public class ClientController {
     {
         List<Client> allClients = clientService.getAllClients();
         model.addAttribute("clients", allClients);
-        model.addAttribute("client",new Client());
-        return "clients";
+
+        return "index";
     }
 
     @RequestMapping("/newclient")
     public String createClient(Model model)
     {
         model.addAttribute("client",new Client());
+
         return "clientform";
     }
 
@@ -46,6 +48,7 @@ public class ClientController {
         }
         else {
         clientService.saveClient(client);
+
         return "redirect:/clients";}
     }
 
@@ -56,21 +59,20 @@ public class ClientController {
         return "redirect:/clients";
     }
 
-
-    @RequestMapping(value = "/filteredbyname", method = RequestMethod.POST)
-    public String GetClientsByName(Client client, BindingResult bindingResult, Model model)
+    @RequestMapping(value = "/client/edit/{id}")
+    public String updateClient(@PathVariable("id") Integer id, Model model)
     {
-        if(bindingResult.hasErrors())
-        {
-            bindingResult.getAllErrors().forEach(error ->{
-                System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
-            });
-            return "filteredform";
-        }
-        else {
-            List<Client> allClients = clientService.getClientsByName(client.getName());
-            model.addAttribute("filtered", allClients);
-            return "filteredbyname";}
+        model.addAttribute("client",clientService.getClientById(id));
+
+        return "clientform";
+    }
+
+    @RequestMapping(value = "/client/{id}")
+    public String getClient(@PathVariable("id") Integer id, Model model)
+    {
+        model.addAttribute("client",clientService.getClientById(id));
+
+        return "client";
     }
 
     @RequestMapping(value = "/filteredbyage", method = RequestMethod.POST)
@@ -85,8 +87,8 @@ public class ClientController {
         }
         else {
             List<Client> allClients = clientService.getClientsByAge(client.getAge());
-            model.addAttribute("filtered", allClients);
-            return "filteredbyage";}
+            model.addAttribute("clients", allClients);
+            return "filtered";}
     }
 
     @RequestMapping(value = "/filteredbyheight", method = RequestMethod.POST)
@@ -101,8 +103,8 @@ public class ClientController {
         }
         else {
             List<Client> allClients = clientService.getClientsByHeight(client.getHeight());
-            model.addAttribute("filtered", allClients);
-            return "filteredbyheight";}
+            model.addAttribute("clients", allClients);
+            return "filtered";}
     }
 
     @RequestMapping(value = "/filteredbyweight", method = RequestMethod.POST)
@@ -117,8 +119,10 @@ public class ClientController {
         }
         else {
             List<Client> allClients = clientService.getClientsByWeight(client.getWeight());
-            model.addAttribute("filtered", allClients);
-            return "filteredbyweight";}
+
+            model.addAttribute("clients", allClients);
+
+            return "filtered";}
     }
 
 

@@ -21,8 +21,8 @@ public class ClientRepository {
     }
 
     @Transactional
-    public void createClient(String name, int age, int height, int weight) {
-        Client newClient = new Client(name, age, height, weight);
+    public void createClient(String name, int age, int height, int weight, String description) {
+        Client newClient = new Client(name, age, height, weight, description);
         em.persist(newClient);
 
     }
@@ -45,9 +45,10 @@ public class ClientRepository {
     }
 
     @Transactional
-    public void createClient(Client client) {
-        em.persist(client);
+    public void saveClient(Client client) {
+        em.merge(client);
     }
+
 
     public Collection<Client> getClientsByAge(Integer age) {
         return em.createQuery("from Client c where c.age=:age", Client.class).setParameter("age", age).getResultList();
@@ -59,10 +60,6 @@ public class ClientRepository {
 
     public Collection<Client> getClientsByweight(Integer weight) {
         return em.createQuery("from Client c where c.weight=:weight", Client.class).setParameter("weight", weight).getResultList();
-    }
-
-    public Collection<Client> getClientsByName(String name) {
-        return em.createQuery("from Client c where c.name=:name", Client.class).setParameter("name", name).getResultList();
     }
 
 }
