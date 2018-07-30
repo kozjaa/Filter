@@ -16,31 +16,26 @@ import java.util.List;
 @Controller
 public class ClientController {
 
+
     @Autowired
-    ClientService clientService;
+    private ClientService clientService;
 
     @RequestMapping("/clients")
-    public String getAllClients(Model model)
-    {
+    public String home (Model model) {
         List<Client> allClients = clientService.getAllClients();
         model.addAttribute("clients", allClients);
-
         return "index";
     }
 
     @RequestMapping("/newclient")
-    public String createClient(Model model)
-    {
+    public String createClient(Model model) {
         model.addAttribute("client",new Client());
-
         return "clientform";
     }
 
     @RequestMapping(value = "/clients", method = RequestMethod.POST)
-    public String saveClient(@Valid Client client, BindingResult bindingResult)
-    {
-        if(bindingResult.hasErrors())
-        {
+    public String saveClient(@Valid Client client, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(error ->{
                 System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
             });
@@ -48,38 +43,30 @@ public class ClientController {
         }
         else {
         clientService.saveClient(client);
-
         return "redirect:/clients";}
     }
 
     @RequestMapping(value = "/client/delete/{id}")
-    public String deleteClient(@PathVariable("id") Integer id)
-    {
+    public String deleteClient(@PathVariable("id") Integer id) {
         clientService.deleteClient(id);
         return "redirect:/clients";
     }
 
     @RequestMapping(value = "/client/edit/{id}")
-    public String updateClient(@PathVariable("id") Integer id, Model model)
-    {
+    public String updateClient(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("client",clientService.getClientById(id));
-
         return "clientform";
     }
 
     @RequestMapping(value = "/client/{id}")
-    public String getClient(@PathVariable("id") Integer id, Model model)
-    {
+    public String getClient(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("client",clientService.getClientById(id));
-
         return "client";
     }
 
     @RequestMapping(value = "/filteredbyage", method = RequestMethod.POST)
-    public String GetClientsByAge(Client client, BindingResult bindingResult, Model model)
-    {
-        if(bindingResult.hasErrors())
-        {
+    public String GetClientsByAge(Client client, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(error ->{
                 System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
             });
@@ -92,10 +79,8 @@ public class ClientController {
     }
 
     @RequestMapping(value = "/filteredbyheight", method = RequestMethod.POST)
-    public String GetClientsByHeight(Client client, BindingResult bindingResult, Model model)
-    {
-        if(bindingResult.hasErrors())
-        {
+    public String GetClientsByHeight(Client client, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(error ->{
                 System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
             });
@@ -108,10 +93,8 @@ public class ClientController {
     }
 
     @RequestMapping(value = "/filteredbyweight", method = RequestMethod.POST)
-    public String GetClientsByWeight(Client client, BindingResult bindingResult, Model model)
-    {
-        if(bindingResult.hasErrors())
-        {
+    public String GetClientsByWeight(Client client, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(error ->{
                 System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
             });
@@ -119,16 +102,13 @@ public class ClientController {
         }
         else {
             List<Client> allClients = clientService.getClientsByWeight(client.getWeight());
-
             model.addAttribute("clients", allClients);
-
             return "filtered";}
     }
 
 
     @RequestMapping("/newfilter")
-    public String createClients(Model model)
-    {
+    public String createClients(Model model) {
         model.addAttribute("client", new Client());
         return "filteredform";
     }

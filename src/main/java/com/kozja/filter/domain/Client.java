@@ -32,13 +32,11 @@ public class Client {
 
     private String description;
 
-    public Client()
-    {
+    public Client() {
 
-     }
+    }
 
-    public Client(String name, int age, int height, int weight, String description)
-    {
+    public Client(String name, int age, int height, int weight, String description) {
         this.name = name;
         this.age = age;
         this.height = height;

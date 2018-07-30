@@ -15,7 +15,6 @@ public class ClientRepository {
     @PersistenceContext
     private EntityManager em;
 
-
     public ClientRepository() {
 
     }
@@ -24,7 +23,6 @@ public class ClientRepository {
     public void createClient(String name, int age, int height, int weight, String description) {
         Client newClient = new Client(name, age, height, weight, description);
         em.persist(newClient);
-
     }
 
 
@@ -33,8 +31,7 @@ public class ClientRepository {
     }
 
     @Transactional
-    public void deleteClient(Integer id
-    ) {
+    public void deleteClient(Integer id) {
         Client client = new Client();
         client.setId(id);
         em.remove(em.contains(client) ? client : em.merge(client));
@@ -48,7 +45,6 @@ public class ClientRepository {
     public void saveClient(Client client) {
         em.merge(client);
     }
-
 
     public Collection<Client> getClientsByAge(Integer age) {
         return em.createQuery("from Client c where c.age=:age", Client.class).setParameter("age", age).getResultList();
